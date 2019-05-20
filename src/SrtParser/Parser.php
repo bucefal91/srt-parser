@@ -50,7 +50,9 @@ class Parser
             //cleans out control characters, borrowed from https://stackoverflow.com/a/23066553
             $section = preg_replace('/[^\PC\s]/u', '', $section);
             if(trim($section) == '') continue;
-            $matches[] = preg_split('/(\r\n|\r|\n)/', $section, 2,PREG_SPLIT_NO_EMPTY);
+            $section = preg_split('/(\r\n|\r|\n)/', rtrim($section), 2,PREG_SPLIT_NO_EMPTY);
+            if (count($section) == 1) continue;
+            $matches[] = $section;
         }
         return $matches;
     }
